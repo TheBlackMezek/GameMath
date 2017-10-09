@@ -16,7 +16,7 @@ float dbl(float f);
 float cube(float f);
 float rad(float d);
 float deg(float r);
-float quad_basic(float x);
+float quad_basic(float x, float c);
 QuadRet quadratic(float a, float b, float c);
 float lerp(float s, float e, float a);
 float dist(float x1, float y1, float x2, float y2);
@@ -58,9 +58,9 @@ float deg(float r)
 	return r * (180 / M_PI);
 }
 
-float quad_basic(float x)
+float quad_basic(float x, float c)
 {
-	return (x * x) + (2 * x) - 7;
+	return (x * x) + (2 * x) - c;
 }
 
 QuadRet quadratic(float a, float b, float c)
