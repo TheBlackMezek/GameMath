@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01-MathReview", "01-MathReview\01-MathReview.vcxproj", "{D9F2EF61-FC2B-4A8D-A8CB-8C3357F0C11F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathLib", "MathLib\MathLib.vcxproj", "{462459A6-08F7-4923-9939-66F1ED618EAA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "X-TestSpace", "X-TestSpace\X-TestSpace.vcxproj", "{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{462459A6-08F7-4923-9939-66F1ED618EAA} = {462459A6-08F7-4923-9939-66F1ED618EAA}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +28,22 @@ Global
 		{D9F2EF61-FC2B-4A8D-A8CB-8C3357F0C11F}.Release|x64.Build.0 = Release|x64
 		{D9F2EF61-FC2B-4A8D-A8CB-8C3357F0C11F}.Release|x86.ActiveCfg = Release|Win32
 		{D9F2EF61-FC2B-4A8D-A8CB-8C3357F0C11F}.Release|x86.Build.0 = Release|Win32
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Debug|x64.ActiveCfg = Debug|x64
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Debug|x64.Build.0 = Debug|x64
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Debug|x86.Build.0 = Debug|Win32
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Release|x64.ActiveCfg = Release|x64
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Release|x64.Build.0 = Release|x64
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Release|x86.ActiveCfg = Release|Win32
+		{462459A6-08F7-4923-9939-66F1ED618EAA}.Release|x86.Build.0 = Release|Win32
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Debug|x64.ActiveCfg = Debug|x64
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Debug|x64.Build.0 = Debug|x64
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Debug|x86.ActiveCfg = Debug|Win32
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Debug|x86.Build.0 = Debug|Win32
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Release|x64.ActiveCfg = Release|x64
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Release|x64.Build.0 = Release|x64
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Release|x86.ActiveCfg = Release|Win32
+		{55E3133E-D7CE-44B6-9AB0-563DE66E95FB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
