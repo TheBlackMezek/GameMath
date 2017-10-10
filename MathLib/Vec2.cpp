@@ -31,14 +31,16 @@ float magnitude(vec2 vec)
 vec2 normal(vec2 vec)
 {
 	vec2 ret;
-	ret.x = vec.x / abs(vec.x);
-	ret.y = vec.y / abs(vec.y);
+	float mag = magnitude(vec);
+	ret.x = vec.x / mag;
+	ret.y = vec.y / mag;
 	return ret;
 }
 vec2& normalize(vec2& vec)
 {
-	vec.x /= abs(vec.x);
-	vec.y /= abs(vec.y);
+	float mag = magnitude(vec);
+	vec.x /= mag;
+	vec.y /= mag;
 	return vec;
 }
 float dot(vec2 v1, vec2 v2)
@@ -72,12 +74,14 @@ vec2 min(vec2 v1, vec2 v2)
 {
 	vec2 ret;
 	ret.x = v1.x < v2.x ? v1.x : v2.x;
+	ret.y = v1.y < v2.y ? v1.y : v2.y;
 	return ret;
 }
 vec2 max(vec2 v1, vec2 v2)
 {
 	vec2 ret;
 	ret.x = v1.x > v2.x ? v1.x : v2.x;
+	ret.y = v1.y > v2.y ? v1.y : v2.y;
 	return ret;
 }
 
