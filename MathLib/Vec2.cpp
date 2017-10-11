@@ -51,6 +51,11 @@ float angle(vec2 v1, vec2 v2)
 {
 	return acos(dot(v1, v2) / (magnitude(v1) * magnitude(v2)));
 }
+bool isAngleClockwise(vec2 v1, vec2 v2)
+{
+	vec2 perp = perpendicular(v2, true);
+	return dot(v1, perp) > 0 ? true : false;
+}
 float distance(vec2 v1, vec2 v2)
 {
 	return sqrt(pow(v1.x - v2.x, 2) + pow(v1.y - v2.y, 2));

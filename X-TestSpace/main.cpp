@@ -53,12 +53,12 @@ int main()
 	orbPos.y = 0;
 
 	vec2 testone;
-	testone.x = 0;
-	testone.y = 10;
+	testone.x = 10;
+	testone.y = 0;
 	vec2 testtwo;
-	testtwo.x = 10;
-	testtwo.y = 0;
-	std::cout << angle(testone, testtwo) << std::endl;
+	testtwo.x = -10;
+	testtwo.y = 10;
+	std::cout << isAngleClockwise(testone, testtwo) << std::endl;
 
 	while (sfw::stepContext())
 	{

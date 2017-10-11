@@ -37,6 +37,7 @@ vec2 normal(vec2 vec);
 vec2& normalize(vec2& vec);
 float dot(vec2 v1, vec2 v2);
 float angle(vec2 v1, vec2 v2);
+bool isAngleClockwise(vec2 v1, vec2 v2);
 float distance(vec2 v1, vec2 v2);
 vec2 perpendicular(vec2 vec, bool clockwise);
 vec2 lerp(vec2 s, vec2 e, float a);
