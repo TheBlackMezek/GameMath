@@ -1,6 +1,8 @@
 
 #include <iostream>
 
+#include "sfwdraw.h"
+
 #include "MathUtils.h"
 #include "Vec2.h"
 #include "Vec3.h"
@@ -35,7 +37,59 @@ int main()
 
 	std::cout << result.x << "," << result.y << "," << result.z << std::endl;
 
-	std::cin.get();
+
+
+	sfw::initContext(800, 600, "StarBlock One");
+
+	sfw::setBackgroundColor(BLACK);
+
+	vec2 playerPos;
+	playerPos.x = 30;
+	playerPos.y = 30;
+
+	float orbRot = 0;
+	vec2 orbPos;
+	orbPos.x = 0;
+	orbPos.y = 0;
+
+	vec2 testone;
+	testone.x = 0;
+	testone.y = 10;
+	vec2 testtwo;
+	testtwo.x = 10;
+	testtwo.y = 0;
+	std::cout << angle(testone, testtwo) << std::endl;
+
+	while (sfw::stepContext())
+	{
+		if (sfw::getKey('W'))
+		{
+			playerPos.y += 2;
+		}
+		if (sfw::getKey('A'))
+		{
+			playerPos.x -= 2;
+		}
+		if (sfw::getKey('S'))
+		{
+			playerPos.y -= 2;
+		}
+		if (sfw::getKey('D'))
+		{
+			playerPos.x += 2;
+		}
+
+		orbRot += 0.1;
+		orbPos.x = playerPos.x + cos(orbRot) * 20;
+		orbPos.y = playerPos.y + sin(orbRot) * 20;
+
+		sfw::drawCircle(playerPos.x, playerPos.y, 10);
+		sfw::drawCircle(orbPos.x, orbPos.y, 2);
+	}
+
+
+
+	//std::cin.get();
 
 
 
