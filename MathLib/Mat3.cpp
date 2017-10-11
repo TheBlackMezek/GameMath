@@ -1,5 +1,6 @@
 #include "Mat3.h"
 
+#include "Vec3.h"
 
 
 Mat3::Mat3()
@@ -69,5 +70,42 @@ Mat3 operator*(const float& lhs, const Mat3& rhs)
 	{
 		ret[i] = rhs[i] * lhs;
 	}
+	return ret;
+}
+Mat3 operator*(const Mat3& lhs, const Mat3& rhs)
+{
+	Mat3 ret;
+	for (int y = 0; y < 3; ++y)
+	{
+		vec3 lhsRow;
+		lhsRow.x = lhs[0 + y * 3];
+		lhsRow.y = lhs[1 + y * 3];
+		lhsRow.z = lhs[2 + y * 3];
+		for (int x = 0; x < 3; ++x)
+		{
+			vec3 rhsColumn;
+			lhsRow.x = lhs[x];
+			lhsRow.y = lhs[x + 1 * 3];
+			lhsRow.z = lhs[x + 2 * 3];
+
+			ret[x + y * 3] = dot(lhsRow, rhsColumn);
+		}
+	}
+	return ret;
+}
+vec3 operator*(const Mat3& lhs, const vec3& rhs)
+{
+	vec3 ret;
+	ret.x = lhs[0] * rhs.x + lhs[1] * rhs.y + lhs[2] * rhs.z;
+	ret.y = lhs[3] * rhs.x + lhs[4] * rhs.y + lhs[5] * rhs.z;
+	ret.z = lhs[6] * rhs.x + lhs[7] * rhs.y + lhs[8] * rhs.z;
+	return ret;
+}
+vec3 operator*(const vec3& lhs, const Mat3& rhs)
+{
+	vec3 ret;
+	ret.x = rhs[0] * lhs.x + rhs[1] * lhs.y + rhs[2] * lhs.z;
+	ret.y = rhs[3] * lhs.x + rhs[4] * lhs.y + rhs[5] * lhs.z;
+	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * lhs.z;
 	return ret;
 }
