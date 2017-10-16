@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "Vec2.h"
+#include "Vec3.h"
 
 
 
@@ -300,4 +301,307 @@ void testVec2()
 
 }
 
+void testVec3()
+{
+	vec3 v1;
+	vec3 v2;
+	float scalar;
+	vec3 result;
+	vec3 expected;
+
+
+	v1.x = 10;
+	v1.y = 20;
+	v1.z = 40;
+	v2.x = 10;
+	v2.y = 20;
+	v2.z = 40;
+	assert(v1 == v2);
+	v1.x = 8;
+	assert(v1 != v2);
+
+	v1.x = 1;
+	v1.y = 2;
+	v1.z = 3;
+	v2.x = 9;
+	v2.y = 18;
+	v2.z = 37;
+	expected.x = 10;
+	expected.y = 20;
+	expected.z = 40;
+	assert(v1 + v2 == expected);
+
+	v1.x = 11;
+	v1.y = 21;
+	v1.z = 41;
+	v2.x = 1;
+	v2.y = 1;
+	v2.z = 1;
+	assert(v1 - v2 == expected);
+
+	v1.x = 5;
+	v1.y = 10;
+	v1.z = 20;
+	scalar = 2;
+	assert(v1 * scalar == expected);
+	assert(scalar * v1 == expected);
+
+	v1.x = 20;
+	v1.y = 40;
+	v1.z = 80;
+	assert(v1 / scalar == expected);
+
+	v1.x = -10;
+	v1.y = -20;
+	v1.z = -40;
+	assert(-v1 == expected);
+
+	v1.x = 1;
+	v1.y = 2;
+	v1.z = 3;
+	v2.x = 9;
+	v2.y = 18;
+	v2.z = 37;
+	assert((v1 += v2) == expected);
+
+	v1.x = 11;
+	v1.y = 21;
+	v1.z = 41;
+	v2.x = 1;
+	v2.y = 1;
+	v2.z = 1;
+	assert((v1 -= v2) == expected);
+
+	v1.x = 5;
+	v1.y = 10;
+	v1.z = 20;
+	scalar = 2;
+	assert((v1 *= scalar) == expected);
+
+	v1.x = 20;
+	v1.y = 40;
+	v1.z = 80;
+	assert((v1 /= scalar) == expected);
+
+	assert(v1[0] == 10);
+
+
+
+
+	std::cout << "MAGNITUDE TESTS:\n\n\n";
+	v1.x = 0;
+	v1.y = 1;
+	v1.z = 0;
+	std::cout << "Should be: 1\nIS:";
+	std::cout << magnitude(v1) << std::endl << std::endl;
+	v1.x = 1;
+	v1.y = 1;
+	v1.z = 1;
+	std::cout << "Should be: ~1.73205\nIS:";
+	std::cout << magnitude(v1) << std::endl << std::endl;
+	v1.x = -2;
+	v1.y = 3;
+	v1.z = 5;
+	std::cout << "Should be: ~6.16441\nIS:";
+	std::cout << magnitude(v1) << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\nNORMALIZATION TESTS:\n\n\n";
+	v1.x = 0;
+	v1.y = 1;
+	v1.z = 0;
+	v2 = normal(v1);
+	std::cout << "Should be: 0,1,0\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	v1.x = 1;
+	v1.y = 1;
+	v1.z = 1;
+	v2 = normal(v1);
+	std::cout << "Should be: 0.577350,0.577350,0.577350\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	v1.x = -2;
+	v1.y = 3;
+	v1.z = 5;
+	v2 = normal(v1);
+	std::cout << "Should be: -0.32444,0.811107,\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl << std::endl;
+
+	v1.x = 0;
+	v1.y = 1;
+	v1.z = 0;
+	normalize(v1);
+	std::cout << "Should be: 0,1,0\nIS:";
+	std::cout << v1.x << "," << v1.y << "," << v1.z << std::endl << std::endl;
+	v1.x = 1;
+	v1.y = 1;
+	v1.z = 1;
+	normalize(v1);
+	std::cout << "Should be: 0.577350,0.577350,0.577350\nIS:";
+	std::cout << v1.x << "," << v1.y << "," << v1.z << std::endl << std::endl;
+	v1.x = -2;
+	v1.y = 3;
+	v1.z = 5;
+	normalize(v1);
+	std::cout << "Should be: -0.32444,0.811107,\nIS:";
+	std::cout << v1.x << "," << v1.y << "," << v1.z << std::endl << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\DOT PRODUCT TESTS:\n\n\n";
+	v1.x = 2;
+	v1.y = 3;
+	v1.z = 4;
+	v2.x = 7;
+	v2.y = 5;
+	v2.z = 3;
+	scalar = dot(v1, v2);
+	std::cout << "Should be: 41\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+	v1.x = 1;
+	v1.y = 0;
+	v1.z = 0;
+	v2.x = 1;
+	v2.y = 1;
+	v2.z = 1;
+	scalar = dot(v1, v2);
+	std::cout << "Should be: 1\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+	v1.x = 4;
+	v1.y = 0;
+	v1.z = 0;
+	v2.x = 1;
+	v2.y = -3;
+	v2.z = 1;
+	scalar = dot(v1, v2);
+	std::cout << "Should be: 4\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\DISTANCE TESTS:\n\n\n";
+	v1.x = 4;
+	v1.y = 0;
+	v1.z = 0;
+	v2.x = 1;
+	v2.y = -3;
+	v2.z = 1;
+	scalar = distance(v1, v2);
+	std::cout << "Should be: 4.358899\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+	v1.x = 8;
+	v1.y = 2;
+	v1.z = 4;
+	v2.x = 1;
+	v2.y = 4;
+	v2.z = 8;
+	scalar = distance(v1, v2);
+	std::cout << "Should be: 8.306624\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+	v1.x = 5;
+	v1.y = 12;
+	v1.z = 20;
+	v2.x = 0;
+	v2.y = 0;
+	v2.z = 0;
+	scalar = distance(v1, v2);
+	std::cout << "Should be: 23.853721\nIS:";
+	std::cout << scalar << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\CROSS PRODUCT TESTS:\n\n\n";
+	v1.x = 4;
+	v1.y = 0;
+	v1.z = 5;
+	v2.x = 1;
+	v2.y = 2;
+	v2.z = 4;
+	result = cross(v1, v2);
+	std::cout << "Should be: -10,-11,8\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	v1.x = 1;
+	v1.y = 3;
+	v1.z = 9;
+	v2.x = 4;
+	v2.y = 4;
+	v2.z = 4;
+	result = cross(v1, v2);
+	std::cout << "Should be: -24,32,-8\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	v1.x = -1;
+	v1.y = -9;
+	v1.z = -19;
+	v2.x = 2;
+	v2.y = -2;
+	v2.z = 4;
+	result = cross(v1, v2);
+	std::cout << "Should be: -74,-34,20\nIS:";
+	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\MIN TESTS:\n\n\n";
+	v1.x = 4;
+	v1.y = 0;
+	v1.z = 0;
+	v2.x = 1;
+	v2.y = -3;
+	v2.z = 1;
+	result = min(v1, v2);
+	std::cout << "Should be: 1,-3,1\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+	v1.x = 2;
+	v1.y = 4;
+	v1.z = 7;
+	v2.x = -6;
+	v2.y = 1;
+	v2.z = 18;
+	result = min(v1, v2);
+	std::cout << "Should be: -6,1,7\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+	v1.x = 444;
+	v1.y = 333;
+	v1.z = 222;
+	v2.x = 111;
+	v2.y = -309;
+	v2.z = 999;
+	result = min(v1, v2);
+	std::cout << "Should be: 111,-309,222\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+
+	std::cin.get();
+
+	std::cout << "\n\n\MAX TESTS:\n\n\n";
+	v1.x = 4;
+	v1.y = 0;
+	v1.z = 0;
+	v2.x = 1;
+	v2.y = -3;
+	v2.z = 1;
+	result = max(v1, v2);
+	std::cout << "Should be: 4,0,1\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+	v1.x = 2;
+	v1.y = 4;
+	v1.z = 7;
+	v2.x = -6;
+	v2.y = 1;
+	v2.z = 18;
+	result = max(v1, v2);
+	std::cout << "Should be: 2,4,18\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+	v1.x = 444;
+	v1.y = 333;
+	v1.z = 222;
+	v2.x = 111;
+	v2.y = -309;
+	v2.z = 999;
+	result = max(v1, v2);
+	std::cout << "Should be: 444,333,999\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
+
+	std::cin.get();
+
+}
 

@@ -14,6 +14,7 @@ int main()
 {
 	
 	//testVec2();
+	testVec3();
 
 	//std::cin.get();
 
