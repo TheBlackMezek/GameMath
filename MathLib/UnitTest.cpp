@@ -511,15 +511,15 @@ void testVec3()
 	std::cin.get();
 
 	std::cout << "\n\n\CROSS PRODUCT TESTS:\n\n\n";
-	v1.x = 4;
-	v1.y = 0;
-	v1.z = 5;
-	v2.x = 1;
-	v2.y = 2;
-	v2.z = 4;
+	v1.x = 2;
+	v1.y = 3;
+	v1.z = 4;
+	v2.x = 5;
+	v2.y = 6;
+	v2.z = 7;
 	result = cross(v1, v2);
-	std::cout << "Should be: -10,-11,8\nIS:";
-	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	std::cout << "Should be: -3,6,-3\nIS:";
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
 	v1.x = 1;
 	v1.y = 3;
 	v1.z = 9;
@@ -528,7 +528,7 @@ void testVec3()
 	v2.z = 4;
 	result = cross(v1, v2);
 	std::cout << "Should be: -24,32,-8\nIS:";
-	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
 	v1.x = -1;
 	v1.y = -9;
 	v1.z = -19;
@@ -537,7 +537,7 @@ void testVec3()
 	v2.z = 4;
 	result = cross(v1, v2);
 	std::cout << "Should be: -74,-34,20\nIS:";
-	std::cout << v2.x << "," << v2.y << "," << v2.z << std::endl << std::endl;
+	std::cout << result.x << "," << result.y << "," << result.z << std::endl << std::endl;
 
 	std::cin.get();
 
