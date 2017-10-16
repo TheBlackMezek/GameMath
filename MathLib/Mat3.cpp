@@ -15,12 +15,12 @@ Mat3::~Mat3()
 {
 }
 
-float& Mat3::operator[](const int i)
+float& Mat3::operator[](const size_t i)
 {
 	return m[i];
 }
 
-const float& Mat3::operator[](const int i) const
+const float& Mat3::operator[](const size_t i) const
 {
 	return m[i];
 }

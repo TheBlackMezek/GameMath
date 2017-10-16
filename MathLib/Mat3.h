@@ -11,8 +11,8 @@ public:
 
 	float m[9];
 
-	float& operator[](const int i);
-	const float& operator[](const int i) const;
+	float& operator[](const size_t i);
+	const float& operator[](const size_t i) const;
 };
 
 

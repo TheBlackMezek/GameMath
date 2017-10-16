@@ -11,12 +11,12 @@
 
 
 
-float& vec3::operator[] (const int idx)
+float& vec3::operator[] (const size_t idx)
 {
 	return v[idx];
 }
 
-const float& vec3::operator[](const int idx) const
+const float& vec3::operator[](const size_t idx) const
 {
 	return v[idx];
 }
