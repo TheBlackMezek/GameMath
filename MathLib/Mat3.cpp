@@ -1,6 +1,7 @@
 #include "Mat3.h"
 
 #include "Vec3.h"
+#include "Vec2.h"
 
 
 Mat3::Mat3()
@@ -9,6 +10,19 @@ Mat3::Mat3()
 	{
 		m[i] = 0;
 	}
+}
+
+Mat3::Mat3(float a, float b, float c, float d, float e, float f, float g, float h, float i)
+{
+	m[0] = a;
+	m[1] = b;
+	m[2] = c;
+	m[3] = d;
+	m[4] = e;
+	m[5] = f;
+	m[6] = g;
+	m[7] = h;
+	m[8] = i;
 }
 
 Mat3::~Mat3()
@@ -200,3 +214,52 @@ Mat3 invert(Mat3& m)
 
 	return ret;
 }
+
+
+
+
+Mat3 mat3identity()
+{
+	Mat3 ret;
+
+	ret[0] = 1;
+	ret[1] = 0;
+	ret[2] = 0;
+
+	ret[3] = 0;
+	ret[4] = 1;
+	ret[5] = 0;
+
+	ret[6] = 0;
+	ret[7] = 0;
+	ret[8] = 1;
+
+	return ret;
+}
+
+Mat3 translation(const vec2& v)
+{
+	Mat3 ret = mat3identity();
+
+	ret[6] = v.x;
+	ret[7] = v.y;
+
+	return ret;
+}
+
+Mat3 scaleMat(const vec2& v)
+{
+	return Mat3(v.x, 0, 0,
+				0, v.y, 0,
+				0, 0, 0);
+}
+
+Mat3 rotation(const vec2& v)
+{
+	vec2 n = normal(v);
+	vec2 perpN = perpendicular(n, false);
+	return Mat3(n.x, perpN.x, 0,
+				n.y, perpN.y, 0,
+				0, 0, 0);
+}
+
