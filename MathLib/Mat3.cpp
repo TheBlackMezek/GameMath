@@ -84,9 +84,9 @@ Mat3 operator*(const Mat3& lhs, const Mat3& rhs)
 		for (int x = 0; x < 3; ++x)
 		{
 			vec3 rhsColumn;
-			rhsColumn.x = lhs[x];
-			rhsColumn.y = lhs[x + 1 * 3];
-			rhsColumn.z = lhs[x + 2 * 3];
+			rhsColumn.x = rhs[x];
+			rhsColumn.y = rhs[x + 1 * 3];
+			rhsColumn.z = rhs[x + 2 * 3];
 
 			ret[x + y * 3] = dot(lhsRow, rhsColumn);
 		}

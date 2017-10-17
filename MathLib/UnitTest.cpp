@@ -652,6 +652,48 @@ void testMat3Determinant()
 	std::cout << "Should be:\n615\n\nIs:\n" << d << std::endl;
 
 	std::cin.get();
+}
+
+void testMat3xIdentity()
+{
+	Mat3 m;
+	m[0] = 9;
+	m[1] = -6;
+	m[2] = -1;
+
+	m[3] = 3;
+	m[4] = -9;
+	m[5] = -8;
+
+	m[6] = 5;
+	m[7] = 7;
+	m[8] = 1;
+
+	Mat3 I;
+	I[0] = 1;
+	I[1] = 0;
+	I[2] = 0;
+
+	I[3] = 0;
+	I[4] = 1;
+	I[5] = 0;
+
+	I[6] = 0;
+	I[7] = 0;
+	I[8] = 1;
 
 
+	m = m * I;
+
+	std::cout << "Should be:\n"
+		"9 3 5\n"
+		"-6 -9 7\n"
+		"-1 -8 1\n\n";
+
+	std::cout << "Is:\n"
+		<< m[0] << " " << m[3] << " " << m[6] << std::endl
+		<< m[1] << " " << m[4] << " " << m[7] << std::endl
+		<< m[2] << " " << m[5] << " " << m[8] << std::endl;
+
+	std::cin.get();
 }
