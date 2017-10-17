@@ -14,7 +14,9 @@ int main()
 {
 	
 	//testVec2();
-	testVec3();
+	//testVec3();
+	testMat3Inverse();
+	testMat3Determinant();
 
 	//std::cin.get();
 

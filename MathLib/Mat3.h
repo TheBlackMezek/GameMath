@@ -28,5 +28,8 @@ vec3 operator*(const vec3& lhs, const Mat3& rhs);
 
 
 //transpose, determinant, inverse
-Mat3 transposition(const Mat3& m);
+Mat3 transposition(const Mat3 m);
 Mat3 transpose(Mat3& m);
+float determinant(const Mat3 m);
+Mat3 inverse(const Mat3 m);
+Mat3 invert(Mat3& m);

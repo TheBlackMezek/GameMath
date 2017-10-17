@@ -112,7 +112,7 @@ vec3 operator*(const vec3& lhs, const Mat3& rhs)
 
 
 
-Mat3 transposition(const Mat3& m)
+Mat3 transposition(const Mat3 m)
 {
 	Mat3 ret;
 
@@ -148,4 +148,55 @@ Mat3 transpose(Mat3& m)
 	}
 
 	return m;
+}
+
+float determinant(const Mat3 m)
+{
+	//taken from https://www.mathsisfun.com/algebra/matrix-determinant.html
+	//might be using numbers in wrong order
+	/*return	m[0] * (m[4] * m[8] - m[7] * m[5])
+		  - m[3] * (m[2] * m[8] - m[7] * m[2])
+		  + m[6] * (m[2] * m[5] - m[4] * m[2]);*/
+	return	m[0] * (m[4] * m[8] - m[5] * m[7])
+		  - m[1] * (m[3] * m[8] - m[5] * m[6])
+		  + m[2] * (m[3] * m[7] - m[4] * m[6]);
+}
+
+Mat3 inverse(const Mat3 m)
+{
+	Mat3 ret;
+
+	ret[0] = m[4] * m[8] - m[7] * m[5];
+	ret[1] = m[7] * m[2] - m[1] * m[8];
+	ret[2] = m[1] * m[5] - m[4] * m[2];
+	ret[3] = m[6] * m[5] - m[3] * m[8];
+	ret[4] = m[0] * m[8] - m[6] * m[2];
+	ret[5] = m[3] * m[2] - m[0] * m[5];
+	ret[6] = m[3] * m[7] - m[6] * m[4];
+	ret[7] = m[6] * m[1] - m[0] * m[7];
+	ret[8] = m[0] * m[4] - m[3] * m[1];
+
+	return ret;
+}
+
+Mat3 invert(Mat3& m)
+{
+	Mat3 ret;
+
+	ret[0] = m[4] * m[8] - m[7] * m[5];
+	ret[1] = m[7] * m[2] - m[1] * m[8];
+	ret[2] = m[1] * m[5] - m[4] * m[2];
+	ret[3] = m[6] * m[5] - m[3] * m[8];
+	ret[4] = m[0] * m[8] - m[6] * m[2];
+	ret[5] = m[3] * m[2] - m[0] * m[5];
+	ret[6] = m[3] * m[7] - m[6] * m[4];
+	ret[7] = m[6] * m[1] - m[0] * m[7];
+	ret[8] = m[0] * m[4] - m[3] * m[1];
+
+	for (int i = 0; i < 9; ++i)
+	{
+		m[i] = ret[i];
+	}
+
+	return ret;
 }

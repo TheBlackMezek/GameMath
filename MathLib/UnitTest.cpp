@@ -7,6 +7,7 @@
 
 #include "Vec2.h"
 #include "Vec3.h"
+#include "Mat3.h"
 
 
 
@@ -605,3 +606,52 @@ void testVec3()
 
 }
 
+void testMat3Inverse()
+{
+	Mat3 m;
+	m[0] = 9;
+	m[1] = -6;
+	m[2] = -1;
+	m[3] = 3;
+	m[4] = -9;
+	m[5] = -8;
+	m[6] = 5;
+	m[7] = 7;
+	m[8] = 1;
+
+	std::cout << "Should be:\n"
+		"47 -43  66\n"
+		"-1  14 -93\n"
+		"39  69 -63\n\n";
+
+	Mat3 mm = inverse(m);
+
+	std::cout << "Is:\n"
+		<< mm[0] << " " << mm[3] << "  " << mm[6] << std::endl
+		<< mm[1] << "  " << mm[4] << " " << mm[7] << std::endl
+		<< mm[2] << "  " << mm[5] << " " << mm[8] << std::endl;
+
+	std::cin.get();
+}
+
+void testMat3Determinant()
+{
+	Mat3 m;
+	m[0] = 9;
+	m[1] = -6;
+	m[2] = -1;
+	m[3] = 3;
+	m[4] = -9;
+	m[5] = -8;
+	m[6] = 5;
+	m[7] = 7;
+	m[8] = 1;
+
+	float d = determinant(m);
+
+	std::cout << "Should be:\n615\n\nIs:\n" << d << std::endl;
+
+	std::cin.get();
+
+
+}
