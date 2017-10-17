@@ -38,5 +38,7 @@ Mat3 invert(Mat3& m);
 
 Mat3 translation(const vec2& v);
 Mat3 scaleMat(const vec2& v);
-Mat3 rotation(const vec2& v);
+//Mat3 rotation(const vec2& v);
+Mat3 rotationByDeg(const float deg);
+Mat3 rotationByRad(const float rad);
 Mat3 mat3identity();

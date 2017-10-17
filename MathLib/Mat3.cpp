@@ -1,5 +1,8 @@
 #include "Mat3.h"
 
+#define _USE_MATH_DEFINES;
+#include <cmath>
+
 #include "Vec3.h"
 #include "Vec2.h"
 
@@ -251,15 +254,31 @@ Mat3 scaleMat(const vec2& v)
 {
 	return Mat3(v.x, 0, 0,
 				0, v.y, 0,
-				0, 0, 0);
+				0, 0, 1);
 }
 
-Mat3 rotation(const vec2& v)
+Mat3 rotationByDeg(const float deg)
 {
-	vec2 n = normal(v);
-	vec2 perpN = perpendicular(n, false);
-	return Mat3(n.x, perpN.x, 0,
-				n.y, perpN.y, 0,
-				0, 0, 0);
+	float rad = (deg * M_PI) / 180;
+
+	return Mat3(cos(rad), -sin(rad), 0,
+				sin(rad), cos(rad), 0,
+				0, 0, 1);
 }
+
+Mat3 rotationByRad(const float rad)
+{
+	return Mat3(cos(rad), -sin(rad), 0,
+				sin(rad), cos(rad), 0,
+				0, 0, 1);
+}
+
+//Mat3 rotation(const vec2& v)
+//{
+//	vec2 n = normal(v);
+//	vec2 perpN = perpendicular(n, false);
+//	return Mat3(n.x, perpN.x, 0,
+//				n.y, perpN.y, 0,
+//				0, 0, 0);
+//}
 
