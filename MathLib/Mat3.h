@@ -25,3 +25,8 @@ Mat3 operator*(const float& lhs, const Mat3& rhs);
 Mat3 operator*(const Mat3& lhs, const Mat3& rhs);
 vec3 operator*(const Mat3& lhs, const vec3& rhs);
 vec3 operator*(const vec3& lhs, const Mat3& rhs);
+
+
+//transpose, determinant, inverse
+Mat3 transposition(const Mat3& m);
+Mat3 transpose(Mat3& m);

@@ -109,3 +109,43 @@ vec3 operator*(const vec3& lhs, const Mat3& rhs)
 	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * lhs.z;
 	return ret;
 }
+
+
+
+Mat3 transposition(const Mat3& m)
+{
+	Mat3 ret;
+
+	ret[0] = m[0];
+	ret[1] = m[3];
+	ret[2] = m[6];
+	ret[3] = m[1];
+	ret[4] = m[4];
+	ret[5] = m[7];
+	ret[6] = m[2];
+	ret[7] = m[5];
+	ret[8] = m[8];
+
+	return ret;
+}
+Mat3 transpose(Mat3& m)
+{
+	Mat3 ret;
+
+	ret[0] = m[0];
+	ret[1] = m[3];
+	ret[2] = m[6];
+	ret[3] = m[1];
+	ret[4] = m[4];
+	ret[5] = m[7];
+	ret[6] = m[2];
+	ret[7] = m[5];
+	ret[8] = m[8];
+
+	for (int i = 0; i < 9; ++i)
+	{
+		m[i] = ret[i];
+	}
+
+	return m;
+}
