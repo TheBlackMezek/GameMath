@@ -697,3 +697,59 @@ void testMat3xIdentity()
 
 	std::cin.get();
 }
+
+void testMat3Transforms()
+{
+	vec2 v = { 10, 20 };
+	Mat3 m = translation(v);
+
+	std::cout << "Translation\n";
+
+	std::cout << "Should be:\n"
+		"1 0 10\n"
+		"0 1 20\n"
+		"0 0 1\n\n";
+
+	std::cout << "Is:\n"
+		<< m[0] << " " << m[3] << " " << m[6] << std::endl
+		<< m[1] << " " << m[4] << " " << m[7] << std::endl
+		<< m[2] << " " << m[5] << " " << m[8] << std::endl;
+
+	std::cin.get();
+
+
+
+	std::cout << "Scale\n";
+
+	m = scaleMat(v);
+
+	std::cout << "Should be:\n"
+		"10 0 0\n"
+		"0 20 0\n"
+		"0 0 1\n\n";
+
+	std::cout << "Is:\n"
+		<< m[0] << " " << m[3] << " " << m[6] << std::endl
+		<< m[1] << " " << m[4] << " " << m[7] << std::endl
+		<< m[2] << " " << m[5] << " " << m[8] << std::endl;
+
+	std::cin.get();
+
+
+
+	std::cout << "Rotation\n";
+
+	m = rotationByDeg(90);
+
+	std::cout << "Should be:\n"
+		"0 -1 0\n"
+		"1 0 0\n"
+		"0 0 1\n\n";
+
+	std::cout << "Is:\n"
+		<< m[0] << " " << m[3] << " " << m[6] << std::endl
+		<< m[1] << " " << m[4] << " " << m[7] << std::endl
+		<< m[2] << " " << m[5] << " " << m[8] << std::endl;
+
+	std::cin.get();
+}

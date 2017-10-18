@@ -15,6 +15,7 @@ int main()
 	
 	//testVec2();
 	//testVec3();
+	testMat3Transforms();
 	testMat3xIdentity();
 	testMat3Inverse();
 	testMat3Determinant();
