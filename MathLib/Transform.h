@@ -12,7 +12,7 @@ public:
 	~Transform();
 
 	vec2 pos;
-	vec2 size;
+	vec2 disfigure;
 	float angleRad;
 	Transform* parent;
 

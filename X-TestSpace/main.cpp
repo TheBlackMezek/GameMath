@@ -23,7 +23,7 @@ int main()
 	
 	//testVec2();
 	//testVec3();
-	testMat3Basic();
+	//testMat3Basic();
 	//testMat3Transforms();
 	//testMat3xIdentity();
 	//testMat3Inverse();
@@ -33,8 +33,6 @@ int main()
 
 	
 
-
-
 	sfw::initContext(800, 600, "StarBlock One");
 
 	sfw::setBackgroundColor(BLACK);
@@ -42,8 +40,14 @@ int main()
 	
 
 	Transform player;
+	player.pos = { 10, 10 };
+	player.disfigure = { 2, 2 };
 	Transform orbball;
+	orbball.pos = { 10, 10 };
 	orbball.parent = &player;
+	Transform orb2;
+	orb2.pos = { 10, 10 };
+	orb2.parent = &orbball;
 
 
 
@@ -88,7 +92,8 @@ int main()
 			}
 		}
 
-
+		orbball.angleRad += 0.01f;
+		orb2.angleRad -= 0.01f;
 
 		//orbRot += 0.1;
 		//orbPos.x = playerPos.x + cos(orbRot) * 20;
@@ -98,6 +103,7 @@ int main()
 		//sfw::drawCircle(orbPos.x, orbPos.y, 2);
 		debugDraw(player);
 		debugDraw(orbball);
+		debugDraw(orb2);
 	}
 
 
@@ -112,7 +118,7 @@ int main()
 
 void debugDraw(Transform& t)
 {
-	float drawScale = magnitude(t.size);
+	float drawScale = 10;
 
 	Mat3 m = t.getGlobalTransform();
 	//Mat3 m = translation(collider.pos);
