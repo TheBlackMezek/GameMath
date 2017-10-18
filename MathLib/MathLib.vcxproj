@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="UnitTest.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />

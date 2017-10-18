@@ -606,6 +606,49 @@ void testVec3()
 
 }
 
+void testMat3Basic()
+{
+	Mat3 m;
+	m[0] = 9;
+	m[1] = 6;
+	m[2] = 1;
+
+	m[3] = 3;
+	m[4] = 9;
+	m[5] = 8;
+
+	m[6] = 5;
+	m[7] = 7;
+	m[8] = 1;
+
+	Mat3 mm;
+	mm[0] = 1;
+	mm[1] = 2;
+	mm[2] = 3;
+
+	mm[3] = 4;
+	mm[4] = 5;
+	mm[5] = 6;
+
+	mm[6] = 7;
+	mm[7] = 8;
+	mm[8] = 9;
+
+	Mat3 result = m * mm;
+
+	std::cout << "Should be:\n"
+		"30 81 132\n"
+		"45 111 177\n"
+		"20 50 80\n\n";
+
+	std::cout << "Is:\n"
+		<< result[0] << " " << result[3] << " " << result[6] << std::endl
+		<< result[1] << " " << result[4] << " " << result[7] << std::endl
+		<< result[2] << " " << result[5] << " " << result[8] << std::endl;
+
+	std::cin.get();
+}
+
 void testMat3Inverse()
 {
 	Mat3 m;

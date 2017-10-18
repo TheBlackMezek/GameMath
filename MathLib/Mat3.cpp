@@ -92,7 +92,20 @@ Mat3 operator*(const float& lhs, const Mat3& rhs)
 Mat3 operator*(const Mat3& lhs, const Mat3& rhs)
 {
 	Mat3 ret;
-	for (int y = 0; y < 3; ++y)
+
+	ret[0] = dot({ lhs[0],lhs[3],lhs[6] }, { rhs[0],rhs[1],rhs[2] });
+	ret[1] = dot({ lhs[1],lhs[4],lhs[7] }, { rhs[0],rhs[1],rhs[2] });
+	ret[2] = dot({ lhs[2],lhs[5],lhs[8] }, { rhs[0],rhs[1],rhs[2] });
+
+	ret[3] = dot({ lhs[0],lhs[3],lhs[6] }, { rhs[3],rhs[4],rhs[5] });
+	ret[4] = dot({ lhs[1],lhs[4],lhs[7] }, { rhs[3],rhs[4],rhs[5] });
+	ret[5] = dot({ lhs[2],lhs[5],lhs[8] }, { rhs[3],rhs[4],rhs[5] });
+
+	ret[6] = dot({ lhs[0],lhs[3],lhs[6] }, { rhs[6],rhs[7],rhs[8] });
+	ret[7] = dot({ lhs[1],lhs[4],lhs[7] }, { rhs[6],rhs[7],rhs[8] });
+	ret[8] = dot({ lhs[2],lhs[5],lhs[8] }, { rhs[6],rhs[7],rhs[8] });
+
+	/*for (int y = 0; y < 3; ++y)
 	{
 		vec3 lhsRow;
 		lhsRow.x = lhs[0 + y * 3];
@@ -107,7 +120,7 @@ Mat3 operator*(const Mat3& lhs, const Mat3& rhs)
 
 			ret[x + y * 3] = dot(lhsRow, rhsColumn);
 		}
-	}
+	}*/
 	return ret;
 }
 vec3 operator*(const Mat3& lhs, const vec3& rhs)
