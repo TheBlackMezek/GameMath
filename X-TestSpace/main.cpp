@@ -11,6 +11,9 @@
 #include "Mat3.h"
 #include "UnitTest.h"
 #include "Transform.h"
+#include "Rigidbody.h"
+#include "MassEffectField.h"
+#include "DrawShapes.h"
 
 
 
@@ -33,7 +36,7 @@ int main()
 
 	
 
-	sfw::initContext(800, 600, "StarBlock One");
+	sfw::initContext(800, 600, "MathTest");
 
 	sfw::setBackgroundColor(BLACK);
 
@@ -42,12 +45,21 @@ int main()
 	Transform player;
 	player.pos = { 10, 10 };
 	player.disfigure = { 2, 2 };
-	Transform orbball;
+	Rigidbody body;
+	body.mass = 10;
+	body.drag = 10;
+	MassEffectField field;
+	field.pos = { 500, 500 };
+
+	float thrusterForce = 1000;
+	float angularForce = 2;
+
+	/*Transform orbball;
 	orbball.pos = { 10, 10 };
 	orbball.parent = &player;
 	Transform orb2;
 	orb2.pos = { 10, 10 };
-	orb2.parent = &orbball;
+	orb2.parent = &orbball;*/
 
 
 
@@ -55,45 +67,61 @@ int main()
 	{
 		vec2 ffacing = player.getForwardFacing();
 		vec2 ufacing = player.getUpFacing();
+
+		//body.force = { 0,0 };
+
 		if (sfw::getKey('W'))
 		{
 			//player.pos.y += 2;
-			player.pos += 2 * ufacing;
-		}
-		if (sfw::getKey('A'))
-		{
-			//player.pos.x -= 2;
-			player.pos -= 2 * ffacing;
+			//player.pos += 2 * ufacing;
+			body.force += ufacing * thrusterForce;
 		}
 		if (sfw::getKey('S'))
 		{
 			//player.pos.y -= 2;
-			player.pos -= 2 * ufacing;
+			//player.pos -= 2 * ufacing;
+			body.force += ufacing * -thrusterForce;
+		}
+
+		if (sfw::getKey('A'))
+		{
+			//player.pos.x -= 2;
+			//player.pos -= 2 * ffacing;
+			body.force += ffacing * -thrusterForce;
 		}
 		if (sfw::getKey('D'))
 		{
 			//player.pos.x += 2;
-			player.pos += 2 * ffacing;
+			//player.pos += 2 * ffacing;
+			body.force += ffacing * thrusterForce;
 		}
+
+		//body.force = faccel + uaccel;
+
 		if (sfw::getKey('Q'))
 		{
-			player.angleRad -= 0.1f;
+			//player.angleRad -= 0.1f;
+			body.torque -= M_PI * angularForce;
 			if (player.angleRad > M_PI * 2)
 			{
-				player.angleRad -= M_PI * 2;
+				//player.angleRad -= M_PI * 2;
 			}
 		}
 		if (sfw::getKey('E'))
 		{
-			player.angleRad += 0.1f;
+			//player.angleRad += 0.1f;
+			body.torque += M_PI * angularForce;
 			if (player.angleRad < 0)
 			{
-				player.angleRad += M_PI * 2;
+				//player.angleRad += M_PI * 2;
 			}
 		}
 
-		orbball.angleRad += 0.01f;
-		orb2.angleRad -= 0.01f;
+		field.effect(player, body);
+		body.integrate(player, sfw::getDeltaTime());
+
+		//orbball.angleRad += 0.01f;
+		//orb2.angleRad -= 0.01f;
 
 		//orbRot += 0.1;
 		//orbPos.x = playerPos.x + cos(orbRot) * 20;
@@ -102,8 +130,9 @@ int main()
 		//sfw::drawCircle(playerPos.x, playerPos.y, 10);
 		//sfw::drawCircle(orbPos.x, orbPos.y, 2);
 		debugDraw(player);
-		debugDraw(orbball);
-		debugDraw(orb2);
+		sfw::drawCircle(field.pos.x, field.pos.y, field.strength, 12U, BLUE);
+		//debugDraw(orbball);
+		//debugDraw(orb2);
 	}
 
 
