@@ -27,8 +27,6 @@ public:
 	float angularVelocity;
 	float angularDrag;
 
-	float massEffect;
-
 
 	void integrate(Transform& T, float dt);
 };

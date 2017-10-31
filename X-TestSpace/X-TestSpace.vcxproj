@@ -128,11 +128,9 @@
   <ItemGroup>
     <ClCompile Include="DrawShapes.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MassEffectField.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawShapes.h" />
-    <ClInclude Include="MassEffectField.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

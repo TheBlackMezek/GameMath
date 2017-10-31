@@ -12,7 +12,6 @@
 #include "UnitTest.h"
 #include "Transform.h"
 #include "Rigidbody.h"
-#include "MassEffectField.h"
 #include "DrawShapes.h"
 #include "Collision.h"
 
@@ -50,8 +49,6 @@ int main()
 	Rigidbody body;
 	body.mass = 10;
 	body.drag = 10;
-	MassEffectField field;
-	field.pos = { 500, 500 };
 
 	AABB box;
 	box.min = { -20, -20 };
@@ -190,7 +187,6 @@ int main()
 		sfw::drawCircle(hitCircle.pos.x, hitCircle.pos.y, hitCircle.radius);
 		sfw::drawCircle(hitCircle2.pos.x, hitCircle2.pos.y, hitCircle2.radius);
 		
-		sfw::drawCircle(field.pos.x, field.pos.y, field.strength, 12U, BLUE);
 		//debugDraw(orbball);
 		//debugDraw(orb2);
 	}
