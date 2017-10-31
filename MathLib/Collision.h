@@ -15,3 +15,5 @@ Collision intersectAABB(const AABB& A, const AABB& B);
 
 Collision intersectCircle(const circle& A, const circle& B);
 
+Collision intersectCircleAABB(const circle& A, const AABB& B);
+

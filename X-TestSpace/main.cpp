@@ -62,6 +62,9 @@ int main()
 	circle hitCircle;
 	hitCircle.pos = { 400, 400 };
 	hitCircle.radius = 20;
+	circle hitCircle2;
+	hitCircle2.pos = { 100, 400 };
+	hitCircle2.radius = 20;
 	//boxBase.pos = box.min;
 	//boxBase.disfigure = box.max - box.min;
 
@@ -171,12 +174,21 @@ int main()
 		{
 			player.pos += col.axis * col.handedness * (col.penetrationDepth);
 		}
+
+		col = intersectCircleAABB(hitCircle2, temp);
+		if (col.penetrationDepth > 0)
+		{
+			player.pos += col.axis * col.handedness * (col.penetrationDepth);
+			trans = player.getGlobalTransform();
+			temp = trans * box;
+		}
 		
 
 
 		drawAABB(otherBox);
 		drawAABB(temp);
 		sfw::drawCircle(hitCircle.pos.x, hitCircle.pos.y, hitCircle.radius);
+		sfw::drawCircle(hitCircle2.pos.x, hitCircle2.pos.y, hitCircle2.radius);
 		
 		sfw::drawCircle(field.pos.x, field.pos.y, field.strength, 12U, BLUE);
 		//debugDraw(orbball);

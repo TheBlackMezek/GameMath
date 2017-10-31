@@ -36,18 +36,27 @@ Collision intersectCircle(const circle& A, const circle& B)
 
 	ret.axis = normal(B.pos - A.pos);
 	ret.handedness = -1;
-
-	float ap = dot(ret.axis, A.pos);
-	float bp = dot(ret.axis, B.pos);
-
-	float Amin = ap - A.radius;
-	float Amax = ap + A.radius;
-
-	float Bmin = bp - B.radius;
-	float Bmax = bp + B.radius;
-
-	ret.penetrationDepth = intersect1D(Amin, Amax, Bmin, Bmax).penetrationDepth;
 	ret.penetrationDepth = (A.radius + B.radius) - distance(A.pos, B.pos);
+
+	return ret;
+}
+
+Collision intersectCircleAABB(const circle& A, const AABB& B)
+{
+	Collision ret;
+	ret.handedness = 1;
+
+	vec2 p;
+	p.x = clamp(A.pos.x, B.min.x, B.max.x);
+	p.y = clamp(A.pos.y, B.min.y, B.max.y);
+
+	vec2 toClosest = p - A.pos;
+
+	ret.axis = normal(toClosest);
+
+	float d = magnitude(toClosest);
+
+	ret.penetrationDepth = A.radius - d;
 
 	return ret;
 }
