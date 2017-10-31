@@ -15,7 +15,6 @@ struct AABB
 {
 	vec2 min;
 	vec2 max;
-
 };
 
 

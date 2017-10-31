@@ -18,13 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rigidbody.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MassEffectField.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shapes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DrawShapes.cpp">
@@ -32,13 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Rigidbody.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MassEffectField.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DrawShapes.h">

@@ -113,6 +113,8 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="shapes.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UnitTest.h" />
     <ClInclude Include="Vec2.h" />
@@ -122,6 +124,8 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="shapes.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="Vec2.cpp" />

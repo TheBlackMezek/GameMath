@@ -14,6 +14,7 @@
 #include "Rigidbody.h"
 #include "MassEffectField.h"
 #include "DrawShapes.h"
+#include "Collision.h"
 
 
 
@@ -55,12 +56,17 @@ int main()
 	AABB box;
 	box.min = { -20, -20 };
 	box.max = { 20, 20 };
-	Transform boxBase;
+	AABB otherBox;
+	otherBox.min = { 100, 100 };
+	otherBox.max = { 130, 150 };
+	circle hitCircle;
+	hitCircle.pos = { 400, 400 };
+	hitCircle.radius = 20;
 	//boxBase.pos = box.min;
 	//boxBase.disfigure = box.max - box.min;
 
 	float thrusterForce = 1000;
-	float angularForce = 2;
+	float angularForce = 20;
 
 	/*Transform orbball;
 	orbball.pos = { 10, 10 };
@@ -106,22 +112,21 @@ int main()
 
 		if (sfw::getKey('Q'))
 		{
-			//player.angleRad -= 0.1f;
 			body.torque -= M_PI * angularForce;
-			if (player.angleRad > M_PI * 2)
-			{
-				//player.angleRad -= M_PI * 2;
-			}
 		}
 		if (sfw::getKey('E'))
 		{
-			//player.angleRad += 0.1f;
 			body.torque += M_PI * angularForce;
-			if (player.angleRad < 0)
-			{
-				//player.angleRad += M_PI * 2;
-			}
 		}
+
+		if(sfw::getKey('B'))
+		{
+			body.torque = 0;
+			body.angularAcceleration = 0;
+			body.angularVelocity = 0;
+		}
+
+		
 
 		//field.effect(player, body);
 		body.integrate(player, sfw::getDeltaTime());
@@ -147,9 +152,31 @@ int main()
 		//drawAABB(boxRender);
 
 		//player.getGlobalTransform() * box;
+		
+
 		auto trans = player.getGlobalTransform();
-		auto temp =  trans * box;
+		auto temp = trans * box;
+
+		Collision col = intersectAABB(temp, otherBox);
+		if (col.penetrationDepth > 0)
+		{
+			player.pos += col.axis * col.handedness * (col.penetrationDepth);
+			trans = player.getGlobalTransform();
+			temp = trans * box;
+			//body.force += col.axis * col.handedness * (col.penetrationDepth * 2);
+		}
+
+		col = intersectCircle({ {player.pos.x, player.pos.y}, 10 }, hitCircle);
+		if (col.penetrationDepth > 0)
+		{
+			player.pos += col.axis * col.handedness * (col.penetrationDepth);
+		}
+		
+
+
+		drawAABB(otherBox);
 		drawAABB(temp);
+		sfw::drawCircle(hitCircle.pos.x, hitCircle.pos.y, hitCircle.radius);
 		
 		sfw::drawCircle(field.pos.x, field.pos.y, field.strength, 12U, BLUE);
 		//debugDraw(orbball);

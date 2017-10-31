@@ -16,8 +16,6 @@ Rigidbody::Rigidbody()
 	angularAcceleration = 0;
 	angularVelocity = 0;
 	angularDrag = 1;
-
-	massEffect = 1;
 }
 
 
@@ -29,19 +27,15 @@ Rigidbody::~Rigidbody()
 
 void Rigidbody::integrate(Transform& T, float dt)
 {
-	//acceleration = force;
-	std::cout << massEffect << std::endl;
-
-	acceleration = force / (mass + mass * massEffect);
-	velocity += acceleration * dt + impulse / (mass + mass * massEffect);
+	acceleration = force / mass;
+	velocity += acceleration * dt + impulse / mass;
 	T.pos += velocity * dt;
 	force = -velocity * drag;
 
 	impulse = { 0,0 };
 
-	//angularAcceleration = torque / (mass + mass * massEffect);
 	angularAcceleration = torque / mass;
-	angularVelocity += angularAcceleration + dt;
+	angularVelocity += angularAcceleration * dt;
 	T.angleRad += angularVelocity * dt;
 	torque = -angularVelocity * angularDrag;
 
