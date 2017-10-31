@@ -1,14 +1,16 @@
 #pragma once
 
-
+#include "Vec2.h"
 
 union vec3
 {
+	// access as vec2
+	struct { vec2 xy; float z; };
 	//access by array
-	float v[3];
-
+	float v[3];	
 	//access by individual component
 	struct { float x, y, z; };
+	
 
 	float& operator[](const size_t idx);
 	const float& operator[](const size_t idx) const;

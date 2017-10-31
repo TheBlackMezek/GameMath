@@ -11,7 +11,12 @@ public:
 	Mat3(float a, float b, float c, float d, float e, float f, float g, float h, float i);
 	~Mat3();
 
-	float m[9];
+	union // untagged union, anonymous union
+	{
+		vec3 c[3];
+		float m[9];
+	};
+
 
 	float& operator[](const size_t i);
 	const float& operator[](const size_t i) const;
@@ -27,6 +32,8 @@ Mat3 operator*(const float& lhs, const Mat3& rhs);
 Mat3 operator*(const Mat3& lhs, const Mat3& rhs);
 vec3 operator*(const Mat3& lhs, const vec3& rhs);
 vec3 operator*(const vec3& lhs, const Mat3& rhs);
+vec3 operator*(const Mat3& lhs, const vec2& rhs);
+vec3 operator*(const vec2& lhs, const Mat3& rhs);
 
 
 //transpose, determinant, inverse

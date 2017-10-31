@@ -139,6 +139,22 @@ vec3 operator*(const vec3& lhs, const Mat3& rhs)
 	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * lhs.z;
 	return ret;
 }
+vec3 operator*(const Mat3& lhs, const vec2& rhs)
+{
+	vec3 ret;
+	ret.x = lhs[0] * rhs.x + lhs[1] * rhs.y + lhs[2] * 1;
+	ret.y = lhs[3] * rhs.x + lhs[4] * rhs.y + lhs[5] * 1;
+	ret.z = lhs[6] * rhs.x + lhs[7] * rhs.y + lhs[8] * 1;
+	return ret;
+}
+vec3 operator*(const vec2& lhs, const Mat3& rhs)
+{
+	vec3 ret;
+	ret.x = rhs[0] * lhs.x + rhs[1] * lhs.y + rhs[2] * 1;
+	ret.y = rhs[3] * lhs.x + rhs[4] * lhs.y + rhs[5] * 1;
+	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * 1;
+	return ret;
+}
 
 
 
