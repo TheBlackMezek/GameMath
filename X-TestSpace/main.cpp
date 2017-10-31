@@ -19,6 +19,7 @@
 
 //void drawTransformCircle()
 void debugDraw(Transform& t);
+void drawAABB(AABB b);
 
 
 int main()
@@ -43,13 +44,20 @@ int main()
 	
 
 	Transform player;
-	player.pos = { 10, 10 };
+	player.pos = { 400, 300 };
 	player.disfigure = { 2, 2 };
 	Rigidbody body;
 	body.mass = 10;
 	body.drag = 10;
 	MassEffectField field;
 	field.pos = { 500, 500 };
+
+	AABB box;
+	box.min = { -20, -20 };
+	box.max = { 20, 20 };
+	Transform boxBase;
+	//boxBase.pos = box.min;
+	//boxBase.disfigure = box.max - box.min;
 
 	float thrusterForce = 1000;
 	float angularForce = 2;
@@ -68,7 +76,6 @@ int main()
 		vec2 ffacing = player.getForwardFacing();
 		vec2 ufacing = player.getUpFacing();
 
-		//body.force = { 0,0 };
 
 		if (sfw::getKey('W'))
 		{
@@ -96,7 +103,6 @@ int main()
 			body.force += ffacing * thrusterForce;
 		}
 
-		//body.force = faccel + uaccel;
 
 		if (sfw::getKey('Q'))
 		{
@@ -117,7 +123,7 @@ int main()
 			}
 		}
 
-		field.effect(player, body);
+		//field.effect(player, body);
 		body.integrate(player, sfw::getDeltaTime());
 
 		//orbball.angleRad += 0.01f;
@@ -129,7 +135,22 @@ int main()
 
 		//sfw::drawCircle(playerPos.x, playerPos.y, 10);
 		//sfw::drawCircle(orbPos.x, orbPos.y, 2);
+
 		debugDraw(player);
+		//drawAABB(box);
+		//AABB boxRender = player.getGlobalTransform() * box;
+		/*AABB boxRender = rotationByRad(player.angleRad) * box;
+		boxRender.max += vec2{ 100, 100 };
+		boxRender.min += vec2{ 100, 100 };
+		std::cout << boxRender.min.x << "," << boxRender.min.y << ",";
+		std::cout << boxRender.max.x << "," << boxRender.max.y << std::endl;*/
+		//drawAABB(boxRender);
+
+		//player.getGlobalTransform() * box;
+		auto trans = player.getGlobalTransform();
+		auto temp =  trans * box;
+		drawAABB(temp);
+		
 		sfw::drawCircle(field.pos.x, field.pos.y, field.strength, 12U, BLUE);
 		//debugDraw(orbball);
 		//debugDraw(orb2);
@@ -162,4 +183,12 @@ void debugDraw(Transform& t)
 	sfw::drawLine(pos.x, pos.y, up_ep.x, up_ep.y, GREEN);
 
 	sfw::drawCircle(pos.x, pos.y, drawScale);
+}
+
+void drawAABB(AABB b)
+{
+	sfw::drawLine(b.min.x, b.min.y, b.max.x, b.min.y);
+	sfw::drawLine(b.min.x, b.max.y, b.max.x, b.max.y);
+	sfw::drawLine(b.min.x, b.min.y, b.min.x, b.max.y);
+	sfw::drawLine(b.max.x, b.min.y, b.max.x, b.max.y);
 }

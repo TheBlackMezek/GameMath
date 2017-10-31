@@ -33,10 +33,15 @@ AABB operator*(const Mat3& M, const AABB& B)
 	vec2 br = { B.max.x, B.min.y };
 	vec2 bl = B.min;
 
-	tr = (tr * M).xy;
-	tl = (tl * M).xy;
-	br = (br * M).xy;
-	bl = (bl * M).xy;
+	tr = mulpos(M, tr);
+	tl = mulpos(M, tl);
+	br = mulpos(M, br);
+	bl = mulpos(M, bl);
+
+	//tr = (tr * M).xy;
+	//tl = (tl * M).xy;
+	//br = (br * M).xy;
+	//l = (bl * M).xy;
 
 	ret.min = min(tr, tl);
 	ret.min = min(ret.min, br);

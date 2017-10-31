@@ -126,9 +126,9 @@ Mat3 operator*(const Mat3& lhs, const Mat3& rhs)
 vec3 operator*(const Mat3& lhs, const vec3& rhs)
 {
 	vec3 ret;
-	ret.x = lhs[0] * rhs.x + lhs[1] * rhs.y + lhs[2] * rhs.z;
-	ret.y = lhs[3] * rhs.x + lhs[4] * rhs.y + lhs[5] * rhs.z;
-	ret.z = lhs[6] * rhs.x + lhs[7] * rhs.y + lhs[8] * rhs.z;
+	ret.x = lhs[0] * rhs.x + lhs[3] * rhs.y + lhs[6] * rhs.z;
+	ret.y = lhs[1] * rhs.x + lhs[4] * rhs.y + lhs[7] * rhs.z;
+	ret.z = lhs[2] * rhs.x + lhs[5] * rhs.y + lhs[8] * rhs.z;
 	return ret;
 }
 vec3 operator*(const vec3& lhs, const Mat3& rhs)
@@ -139,6 +139,8 @@ vec3 operator*(const vec3& lhs, const Mat3& rhs)
 	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * lhs.z;
 	return ret;
 }
+
+// 3x3 * 2x1 = illegal
 vec3 operator*(const Mat3& lhs, const vec2& rhs)
 {
 	vec3 ret;
@@ -147,13 +149,30 @@ vec3 operator*(const Mat3& lhs, const vec2& rhs)
 	ret.z = lhs[6] * rhs.x + lhs[7] * rhs.y + lhs[8] * 1;
 	return ret;
 }
+
+// 2x1 * 3x3 = illegal
 vec3 operator*(const vec2& lhs, const Mat3& rhs)
 {
 	vec3 ret;
-	ret.x = rhs[0] * lhs.x + rhs[1] * lhs.y + rhs[2] * 1;
-	ret.y = rhs[3] * lhs.x + rhs[4] * lhs.y + rhs[5] * 1;
-	ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * 1;
+	//ret.x = rhs[0] * lhs.x + rhs[1] * lhs.y + rhs[2] * 1;
+	//ret.y = rhs[3] * lhs.x + rhs[4] * lhs.y + rhs[5] * 1;
+	//ret.z = rhs[6] * lhs.x + rhs[7] * lhs.y + rhs[8] * 1;
+
+
+	ret.x = rhs[0] * lhs.x + rhs[3] * lhs.y + rhs[6] * 1;
+	ret.y = rhs[1] * lhs.x + rhs[4] * lhs.y + rhs[7] * 1;
+	ret.z = rhs[2] * lhs.x + rhs[5] * lhs.y + rhs[8] * 1;
 	return ret;
+}
+
+vec2 mulpos(const Mat3& rhs, const vec2& lhs)
+{
+	return (rhs * vec3{lhs, 1}).xy;
+}
+
+vec2 muldir(const Mat3& rhs, const vec2& lhs)
+{
+	return (rhs * vec3{ lhs, 0 }).xy;
 }
 
 
