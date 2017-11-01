@@ -36,5 +36,5 @@ public:
 
 
 bool doCollision(Player& player, const Wall& wall);
-bool doCollision(Player& player, const Ball& ball);
-bool doCollision(Ball& ball, Wall& wall);
+bool doCollision(Player& player, Ball& ball);
+bool doCollision(Ball& ball, const Wall& wall);
