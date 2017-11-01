@@ -60,3 +60,32 @@ Collision intersectCircleAABB(const circle& A, const AABB& B)
 
 	return ret;
 }
+
+
+
+void resolutionStatic(vec2& pos, vec2& vel, const Collision& hit, float elasticity)
+{
+	pos += hit.axis * hit.handedness * hit.penetrationDepth;
+
+	vel = -reflect(vel, hit.axis * hit.handedness) * elasticity;
+}
+
+void resolutionDynamic(	vec2& apos, vec2& avel, const float amass,
+						vec2& bpos, vec2& bvel, const float bmass,
+						const Collision& hit, float elasticity = 1.0f)
+{
+	//mass * vel = momentum
+
+	vec2 normal = hit.axis * hit.handedness;
+
+	vec2 rvel = avel - bvel;
+
+	//impulse magnitude - balanced change in magnitude
+	float j = -(1+elasticity) * dot(rvel, normal) / dot(normal, normal*(1 / amass + 1 / bmass));
+
+	avel += (j / amass) * normal;
+	bvel -= (j / bmass) * normal;
+
+	apos += normal * hit.penetrationDepth * amass / (amass + bmass);
+	bpos -= normal * hit.penetrationDepth * bmass / (amass + bmass);
+}

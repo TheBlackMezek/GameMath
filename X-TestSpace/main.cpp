@@ -10,10 +10,9 @@
 #include "Vec3.h"
 #include "Mat3.h"
 #include "UnitTest.h"
-#include "Transform.h"
-#include "Rigidbody.h"
 #include "DrawShapes.h"
 #include "Collision.h"
+#include "GameObjects.h"
 
 
 
@@ -43,12 +42,11 @@ int main()
 
 	
 
-	Transform player;
-	player.pos = { 400, 300 };
-	player.disfigure = { 2, 2 };
-	Rigidbody body;
-	body.mass = 10;
-	body.drag = 10;
+	Player player;
+	player.transform.pos = { 400, 300 };
+	player.transform.disfigure = { 2, 2 };
+	player.body.mass = 10;
+	player.body.drag = 10;
 
 	AABB box;
 	box.min = { -20, -20 };
@@ -79,57 +77,57 @@ int main()
 
 	while (sfw::stepContext())
 	{
-		vec2 ffacing = player.getForwardFacing();
-		vec2 ufacing = player.getUpFacing();
+		vec2 ffacing = player.transform.getForwardFacing();
+		vec2 ufacing = player.transform.getUpFacing();
 
 
 		if (sfw::getKey('W'))
 		{
 			//player.pos.y += 2;
 			//player.pos += 2 * ufacing;
-			body.force += ufacing * thrusterForce;
+			player.body.force += ufacing * thrusterForce;
 		}
 		if (sfw::getKey('S'))
 		{
 			//player.pos.y -= 2;
 			//player.pos -= 2 * ufacing;
-			body.force += ufacing * -thrusterForce;
+			player.body.force += ufacing * -thrusterForce;
 		}
 
 		if (sfw::getKey('A'))
 		{
 			//player.pos.x -= 2;
 			//player.pos -= 2 * ffacing;
-			body.force += ffacing * -thrusterForce;
+			player.body.force += ffacing * -thrusterForce;
 		}
 		if (sfw::getKey('D'))
 		{
 			//player.pos.x += 2;
 			//player.pos += 2 * ffacing;
-			body.force += ffacing * thrusterForce;
+			player.body.force += ffacing * thrusterForce;
 		}
 
 
 		if (sfw::getKey('Q'))
 		{
-			body.torque -= M_PI * angularForce;
+			player.body.torque -= M_PI * angularForce;
 		}
 		if (sfw::getKey('E'))
 		{
-			body.torque += M_PI * angularForce;
+			player.body.torque += M_PI * angularForce;
 		}
 
 		if(sfw::getKey('B'))
 		{
-			body.torque = 0;
-			body.angularAcceleration = 0;
-			body.angularVelocity = 0;
+			player.body.torque = 0;
+			player.body.angularAcceleration = 0;
+			player.body.angularVelocity = 0;
 		}
 
 		
 
 		//field.effect(player, body);
-		body.integrate(player, sfw::getDeltaTime());
+		player.body.integrate(player.transform, sfw::getDeltaTime());
 
 		//orbball.angleRad += 0.01f;
 		//orb2.angleRad -= 0.01f;
@@ -141,7 +139,6 @@ int main()
 		//sfw::drawCircle(playerPos.x, playerPos.y, 10);
 		//sfw::drawCircle(orbPos.x, orbPos.y, 2);
 
-		debugDraw(player);
 		//drawAABB(box);
 		//AABB boxRender = player.getGlobalTransform() * box;
 		/*AABB boxRender = rotationByRad(player.angleRad) * box;
@@ -154,34 +151,38 @@ int main()
 		//player.getGlobalTransform() * box;
 		
 
-		auto trans = player.getGlobalTransform();
+		auto trans = player.transform.getGlobalTransform();
 		auto temp = trans * box;
 
 		Collision col = intersectAABB(temp, otherBox);
 		if (col.penetrationDepth > 0)
 		{
-			player.pos += col.axis * col.handedness * (col.penetrationDepth);
-			trans = player.getGlobalTransform();
+			resolutionStatic(player.transform.pos, player.body.velocity, col, 0.25f);
+			//player.pos += col.axis * col.handedness * (col.penetrationDepth);
+			trans = player.transform.getGlobalTransform();
 			temp = trans * box;
 			//body.force += col.axis * col.handedness * (col.penetrationDepth * 2);
 		}
 
-		col = intersectCircle({ {player.pos.x, player.pos.y}, 10 }, hitCircle);
+		col = intersectCircle({ {player.transform.pos.x, player.transform.pos.y}, 10 }, hitCircle);
 		if (col.penetrationDepth > 0)
 		{
-			player.pos += col.axis * col.handedness * (col.penetrationDepth);
+			resolutionStatic(player.transform.pos, player.body.velocity, col, 1.0f);
+			//player.pos += col.axis * col.handedness * (col.penetrationDepth);
 		}
 
 		col = intersectCircleAABB(hitCircle2, temp);
 		if (col.penetrationDepth > 0)
 		{
-			player.pos += col.axis * col.handedness * (col.penetrationDepth);
-			trans = player.getGlobalTransform();
+			resolutionStatic(player.transform.pos, player.body.velocity, col, 0.25f);
+			//player.pos += col.axis * col.handedness * (col.penetrationDepth);
+			trans = player.transform.getGlobalTransform();
 			temp = trans * box;
 		}
 		
 
 
+		debugDraw(player.transform);
 		drawAABB(otherBox);
 		drawAABB(temp);
 		sfw::drawCircle(hitCircle.pos.x, hitCircle.pos.y, hitCircle.radius);

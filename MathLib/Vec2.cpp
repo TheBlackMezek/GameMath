@@ -186,3 +186,14 @@ bool operator!=(const vec2 &lhs, const vec2 &rhs)
 	return	(abs(lhs.x - rhs.x) < FLT_EPSILON) &&
 			(abs(lhs.y - rhs.y) < FLT_EPSILON) ? false : true;
 }
+
+
+
+vec2 project(const vec2& v, const vec2& axis)
+{
+	return dot(v, axis) * axis;
+}
+vec2 reflect(const vec2& v, const vec2& axis)
+{
+	return 2 * project(v, axis) - v;
+}
