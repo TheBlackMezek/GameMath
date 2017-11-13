@@ -1,6 +1,7 @@
 #include "Collision.h"
 
 #include <cmath>
+#include <algorithm>
 #include "MathUtils.h"
 
 
@@ -12,8 +13,8 @@ Collision intersect1D(float Amin, float Amax, float Bmin, float Bmax)
 
 	float lPD = Bmax - Amin;
 	float rPD = Amax - Bmin;
-
-	ret.penetrationDepth = min(lPD, rPD);
+	
+	ret.penetrationDepth = std::min(lPD, rPD);
 	ret.handedness = copysign(1, rPD - lPD);
 
 	return ret;
@@ -72,7 +73,7 @@ void resolutionStatic(vec2& pos, vec2& vel, const Collision& hit, float elastici
 
 void resolutionDynamic(	vec2& apos, vec2& avel, const float amass,
 						vec2& bpos, vec2& bvel, const float bmass,
-						const Collision& hit, float elasticity = 1.0f)
+						const Collision& hit, float elasticity)
 {
 	//mass * vel = momentum
 
